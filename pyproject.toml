@@ -1,0 +1,45 @@
+[project]
+name = "microfluidics-workspace"
+version = "0.1.0"
+description = "Standalone local MCP surface and CFD solvers for microfluidics"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy==2.4.4",
+    "matplotlib==3.10.8",
+    "meshio==5.3.5",
+    "scipy==1.16.3",
+    "pyamg==5.3.0",
+    "pyyaml==6.0.3",
+    "torch==2.5.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.0.3",
+    "ruff==0.15.10",
+    "pre-commit==4.5.1",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "unit: fast isolated contracts and numerical primitives",
+    "integration: boundaries between modules, CLIs, filesystems, and tools",
+    "regression: stable numerical or behavioral baselines",
+    "system: multi-process or end-to-end pipeline workflows",
+    "performance: benchmark and compile-performance contracts",
+    "slow: tests excluded from the default fast local loop",
+    "windows: tests that require Windows or PowerShell",
+]
+
+[tool.uv.workspace]
+members = ["backend", "compute", "shared/contracts", "mcp-server"]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

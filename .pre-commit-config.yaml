@@ -1,0 +1,34 @@
+﻿minimum_pre_commit_version: "3.6.0"
+default_install_hook_types: [pre-commit]
+default_stages: [pre-commit]
+exclude: ^(results/)
+
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff (uv) - lint
+        entry: uv run --no-sync ruff check --fix --exit-non-zero-on-fix
+        language: system
+        types_or: [python, pyi]
+        require_serial: true
+      - id: ruff-format
+        name: ruff (uv) - format
+        entry: uv run --no-sync ruff format
+        language: system
+        types_or: [python, pyi]
+        require_serial: true
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^data/meshes/
+      - id: end-of-file-fixer
+        exclude: ^data/meshes/
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-toml
+      - id: check-added-large-files
+        args: ["--maxkb=25000"]
+      - id: detect-private-key

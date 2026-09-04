@@ -1,0 +1,41 @@
+version: 1
+
+metadata:
+  name: "Exothermic homogeneous A + B -> C"
+  version: "1.0"
+  description: >-
+    Synthetic, mass-balanced acceptance mechanism for standalone chemistry.
+    It is intentionally not presented as a physical property dataset.
+  mechanism_family: homogeneous
+  temperature_range: [250.0, 1500.0]
+
+units:
+  activation-energy: J/mol
+
+species:
+  - name: A
+    formula: A
+    phase: liquid
+    molecular_weight: 10.0
+    composition: {X: 1.0}
+  - name: B
+    formula: B
+    phase: liquid
+    molecular_weight: 20.0
+    composition: {Y: 1.0}
+  - name: C
+    formula: AB
+    phase: liquid
+    molecular_weight: 30.0
+    composition: {X: 1.0, Y: 1.0}
+
+reactions:
+  - id: R1
+    equation: A + B -> C
+    kinetics:
+      A: 1.0e-3 m^3/(mol*s)
+      Ea: 25000.0 J/mol
+    thermodynamics:
+      dH: -50000.0 J/mol
+      dS: -50.0 J/(mol*K)
+    notes: "Negative dH must produce positive heat_release_w_per_m3."

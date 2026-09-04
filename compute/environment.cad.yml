@@ -1,0 +1,11 @@
+name: microfluidics-cad
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pythonocc-core=7.9.3
+  - numpy=2.4.4
+  - meshio=5.3.5
+  - pyyaml=6.0.3
+  - pytest=9.0.3
+  - pip

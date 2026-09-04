@@ -1,0 +1,48 @@
+version: 1
+
+metadata:
+  name: "Esterification kinetics regression"
+  version: "1.0"
+  description: >-
+    Kinetic-only liquid-phase mechanism for a reversible esterification
+    regression. Reaction enthalpy is intentionally not invented;
+    heat-release evaluation remains unavailable until reviewed dH data is authored.
+  mechanism_family: homogeneous
+  provenance: "bundled standalone regression example"
+
+units:
+  activation-energy: J/mol
+
+species:
+  - name: C2H4O2
+    formula: C2H4O2
+    phase: liquid
+    molecular_weight: 60.0
+    composition: {C: 2.0, H: 4.0, O: 2.0}
+  - name: C2H5OH
+    formula: C2H6O
+    aliases: [ethanol]
+    phase: liquid
+    molecular_weight: 46.0
+    composition: {C: 2.0, H: 6.0, O: 1.0}
+  - name: H2O
+    formula: H2O
+    phase: liquid
+    molecular_weight: 18.0
+    composition: {H: 2.0, O: 1.0}
+  - name: Et-Ac
+    formula: C4H8O2
+    aliases: [ethyl_acetate]
+    phase: liquid
+    molecular_weight: 88.0
+    composition: {C: 4.0, H: 8.0, O: 2.0}
+
+reactions:
+  - id: r1
+    equation: C2H5OH + C2H4O2 -> Et-Ac + H2O
+    kinetics:
+      A: 5.0e-6
+      Ea: 0.0
+    notes: >-
+      A is canonical for concentrations in mol/m^3. No reaction enthalpy is
+      provided, so consumers must explicitly allow missing enthalpy.

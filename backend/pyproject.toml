@@ -1,0 +1,26 @@
+[project]
+name = "microfluidics-backend"
+version = "0.1.0"
+description = "Local backend API and CFD execution service"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+    "microfluidics-contracts",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.0.3",
+    "ruff==0.15.10",
+]
+
+[tool.uv.sources]
+microfluidics-contracts = { workspace = true }
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]

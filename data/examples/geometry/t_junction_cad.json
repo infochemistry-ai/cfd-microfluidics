@@ -1,0 +1,27 @@
+{
+  "schema_version": "geometry_pipeline_v1",
+  "source": {
+    "kind": "procedural_cad"
+  },
+  "geometry": {
+    "inlet_width": 0.001,
+    "outlet_width": 0.002,
+    "channel_height": 0.001,
+    "inlet_length": 0.012,
+    "outlet_length": 0.02,
+    "include_cavities": true,
+    "cavity_depth": 0.0005,
+    "cavity_length": 0.002,
+    "cavity_offset_from_junction": 0.002,
+    "fillet_radius": 0.00005
+  },
+  "mesh": {
+    "element_size": 0.0002,
+    "optimize": true,
+    "timeout_seconds": 300.0,
+    "max_aspect_ratio": 12.0,
+    "min_tetra_mean_ratio": 0.05,
+    "min_positive_volume": 1e-18
+  },
+  "legacy_resolution": [220, 140, 28]
+}

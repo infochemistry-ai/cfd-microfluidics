@@ -1,0 +1,37 @@
+[project]
+name = "microfluidics-compute"
+version = "0.1.0"
+description = "Microfluidics compute core domain"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy==2.4.4",
+    "matplotlib==3.10.8",
+    "meshio==5.3.5",
+    "scipy==1.16.3",
+    "pyyaml==6.0.3",
+    "pyamg==5.3.0",
+    "torch==2.5.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.0.3",
+    "ruff==0.15.10",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["microfluidics*"]

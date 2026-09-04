@@ -1,0 +1,31 @@
+[project]
+name = "microfluidics-mcp"
+version = "0.1.0"
+description = "MCP surface for the microfluidics CFD compute service"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+    "microfluidics-backend",
+    "microfluidics-compute",
+    "microfluidics-contracts",
+    "mcp==1.28.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.0.3",
+    "ruff==0.15.10",
+]
+
+[tool.uv.sources]
+microfluidics-backend = { workspace = true }
+microfluidics-compute = { workspace = true }
+microfluidics-contracts = { workspace = true }
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["microfluidics_mcp*"]

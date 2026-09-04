@@ -1,0 +1,76 @@
+{
+  "schema_version": "case_config_v1",
+  "case_id": "vertical-pipe-water",
+  "mesh": {
+    "path": "../../meshes/gmsh/vertical_pipe_500.msh"
+  },
+  "zones": [
+    {"id": "fluid", "kind": "volume", "physical_names": ["fluid"]},
+    {"id": "inlet", "kind": "surface", "physical_names": ["inlet"]},
+    {"id": "outlet", "kind": "surface", "physical_names": ["outlet"]},
+    {"id": "walls", "kind": "surface", "physical_names": ["walls"]}
+  ],
+  "materials": [
+    {
+      "id": "water",
+      "zone": "fluid",
+      "properties": {
+        "density_kg_per_m3": 1000.0,
+        "kinematic_viscosity_m2_per_s": 1e-6,
+        "thermal_conductivity_w_per_m_k": 0.6,
+        "specific_heat_capacity_j_per_kg_k": 4180.0,
+        "scalar_diffusivity_m2_per_s": 3e-10
+      }
+    }
+  ],
+  "boundary_conditions": [
+    {
+      "id": "inlet-velocity",
+      "zone": "inlet",
+      "kind": "velocity_inlet",
+      "normal_speed_m_per_s": 0.02
+    },
+    {
+      "id": "outlet-pressure",
+      "zone": "outlet",
+      "kind": "pressure_outlet",
+      "pressure_pa": 0.0
+    },
+    {"id": "wall-flow", "zone": "walls", "kind": "wall", "wall_mode": "no_slip"},
+    {
+      "id": "inlet-concentration",
+      "zone": "inlet",
+      "kind": "dirichlet",
+      "field": "concentration",
+      "value": 1.0
+    },
+    {
+      "id": "wall-concentration-flux",
+      "zone": "walls",
+      "kind": "neumann",
+      "field": "concentration",
+      "flux": 0.0
+    },
+    {
+      "id": "inlet-temperature",
+      "zone": "inlet",
+      "kind": "dirichlet",
+      "field": "temperature",
+      "value": 303.15
+    },
+    {
+      "id": "adiabatic-wall",
+      "zone": "walls",
+      "kind": "neumann",
+      "field": "temperature",
+      "flux": 0.0
+    }
+  ],
+  "mesh_quality": {
+    "min_cell_volume_m3": 1e-18,
+    "min_face_area_m2": 0.0,
+    "max_tetra_aspect_ratio": 50.0,
+    "max_reported_findings": 100,
+    "fail_on_warnings": false
+  }
+}

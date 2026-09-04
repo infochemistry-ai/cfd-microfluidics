@@ -1,0 +1,122 @@
+{
+  "schema_version": "case_config_v1",
+  "case_id": "t-junction-water-mixing",
+  "mesh": {
+    "path": "../../meshes/gmsh/t_junction.msh"
+  },
+  "zones": [
+    {
+      "id": "fluid",
+      "kind": "volume",
+      "physical_names": ["fluid"]
+    },
+    {
+      "id": "left_inlet",
+      "kind": "surface",
+      "physical_names": ["left_inlet"]
+    },
+    {
+      "id": "right_inlet",
+      "kind": "surface",
+      "physical_names": ["right_inlet"]
+    },
+    {
+      "id": "outlet",
+      "kind": "surface",
+      "physical_names": ["outlet"]
+    },
+    {
+      "id": "walls",
+      "kind": "surface",
+      "physical_names": ["walls"]
+    }
+  ],
+  "materials": [
+    {
+      "id": "water",
+      "zone": "fluid",
+      "properties": {
+        "density_kg_per_m3": 1000.0,
+        "kinematic_viscosity_m2_per_s": 1e-6,
+        "thermal_conductivity_w_per_m_k": 0.6,
+        "specific_heat_capacity_j_per_kg_k": 4180.0,
+        "scalar_diffusivity_m2_per_s": 3e-10
+      }
+    }
+  ],
+  "boundary_conditions": [
+    {
+      "id": "left-velocity",
+      "zone": "left_inlet",
+      "kind": "velocity_inlet",
+      "normal_speed_m_per_s": 0.15
+    },
+    {
+      "id": "right-velocity",
+      "zone": "right_inlet",
+      "kind": "velocity_inlet",
+      "normal_speed_m_per_s": 0.15
+    },
+    {
+      "id": "outlet-pressure",
+      "zone": "outlet",
+      "kind": "pressure_outlet",
+      "pressure_pa": 0.0
+    },
+    {
+      "id": "wall-flow",
+      "zone": "walls",
+      "kind": "wall",
+      "wall_mode": "no_slip"
+    },
+    {
+      "id": "left-concentration",
+      "zone": "left_inlet",
+      "kind": "dirichlet",
+      "field": "concentration",
+      "value": 0.0
+    },
+    {
+      "id": "right-concentration",
+      "zone": "right_inlet",
+      "kind": "dirichlet",
+      "field": "concentration",
+      "value": 1.0
+    },
+    {
+      "id": "wall-scalar-flux",
+      "zone": "walls",
+      "kind": "neumann",
+      "field": "concentration",
+      "flux": 0.0
+    },
+    {
+      "id": "left-temperature",
+      "zone": "left_inlet",
+      "kind": "dirichlet",
+      "field": "temperature",
+      "value": 303.15
+    },
+    {
+      "id": "right-temperature",
+      "zone": "right_inlet",
+      "kind": "dirichlet",
+      "field": "temperature",
+      "value": 303.15
+    },
+    {
+      "id": "adiabatic-walls",
+      "zone": "walls",
+      "kind": "neumann",
+      "field": "temperature",
+      "flux": 0.0
+    }
+  ],
+  "mesh_quality": {
+    "min_cell_volume_m3": 1e-18,
+    "min_face_area_m2": 0.0,
+    "max_tetra_aspect_ratio": 12.0,
+    "max_reported_findings": 100,
+    "fail_on_warnings": false
+  }
+}
